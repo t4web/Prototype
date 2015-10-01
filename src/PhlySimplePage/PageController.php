@@ -196,6 +196,17 @@ class PageController implements
         $layout = $matches->getParam('layout', false);
         if (!$layout) {
             $layout = $e->getRequest()->getQuery('l');
+
+            if (!empty($layout)) {
+                $config = $e->getApplication()->getServiceManager()->get('config');
+                $viewManagerConfig = $config['view_manager'];
+                if (!isset($viewManagerConfig[$layout])) {
+                    throw new Exception\DomainException(sprintf(
+                        'Layout %s does not exists',
+                        $layout
+                    ));
+                }
+            }
         }
 
         if ($layout) {
