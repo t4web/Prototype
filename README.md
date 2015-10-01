@@ -106,9 +106,9 @@ likely create the file in `module/Application/view/about.phtml`.
 
 After this you may go to page `http://your.host/proto?t=about` 
 or 
-`http://your.host/proto?t=about/first` - and will be sown template `module/Application/view/about/first.phtml`
-`http://your.host/proto?t=about/second` - and will be sown template `module/Application/view/about/second.phtml`
-`http://your.host/proto?t=about/second&l=layout/empty` - and will be sown template `module/Application/view/about/second.phtml`
+- `http://your.host/proto?t=about/first` - and will be sown template `module/Application/view/about/first.phtml`
+- `http://your.host/proto?t=about/second` - and will be sown template `module/Application/view/about/second.phtml`
+- `http://your.host/proto?t=about/second&l=layout/empty` - and will be sown template `module/Application/view/about/second.phtml`
 and layout `module/Application/view/layout/empty.phtml`
 
 ## Caching
