@@ -200,7 +200,15 @@ class PageController implements
             if (!empty($layout)) {
                 $config = $e->getApplication()->getServiceManager()->get('config');
                 $viewManagerConfig = $config['view_manager'];
-                if (!isset($viewManagerConfig[$layout])) {
+
+                $layoutExists = false;
+                foreach ($viewManagerConfig['template_path_stack'] as $path) {
+                    if (file_exists($path . DIRECTORY_SEPARATOR . $layout . '.phtml')) {
+                        $layoutExists = true;
+                    }
+                }
+
+                if (!$layoutExists) {
                     throw new Exception\DomainException(sprintf(
                         'Layout %s does not exists',
                         $layout
