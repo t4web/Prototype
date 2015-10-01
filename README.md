@@ -15,7 +15,7 @@ By default, this requires the following steps:
 - Create an action in that controller
 - Create a template
 
-This module halves the workflow by eliminating the middle two steps.
+This module halves the workflow by eliminating the first three steps.
 
 ## Installation
 
@@ -23,31 +23,30 @@ This module halves the workflow by eliminating the middle two steps.
 
 Grab a source download:
 
-- https://github.com/weierophinney/PhlySimplePage/archive/master.zip
+- https://github.com/t4web/Prototype/archive/master.zip
 
 Unzip it in your `vendor` directory, and rename the resulting directory:
 
 ```sh
 cd vendor
-unzip /path/to/PhlySimplePage-master.zip
-mv PhlySimplePage-master PhlySimplePage
-```
-
-### Git submodule
-
-Add the repository as a git submodule in your project.
-
-```sh
-git submodule add git://github.com/weierophinney/PhlySimplePage.git vendor/PhlySimplePage
+unzip /path/to/Prototype-master.zip
+mv Prototype-master phly-simple-page
 ```
 
 ### Use Composer
 
 Assuming you already have `composer.phar`, add `PhlySimplePage` to your
-`composer.json` file:
+`composer.json` file and link on this repository:
 
 ```js
 {
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/t4web/Prototype.git",
+            "reference": "master"
+        }
+    ],
     "require": {
         "phly/phly-simple-page": "dev-master"
     }
@@ -85,14 +84,14 @@ defaults.
 return array(
     'router' => array(
         'routes' => array(
-            'about' => array(
+            'proto' => array(
                 'type' => 'Literal',
                 'options' => array(
-                    'route' => '/about',
+                    'route' => '/proto',
                     'defaults' => array(
                         'controller' => 'PhlySimplePage\Controller\Page',
+                        // optionally set a specific layout and template for this page
                         'template'   => 'application/pages/about',
-                        // optionally set a specific layout for this page
                         'layout'     => 'layout/some-layout',
                     ),
                 ),
@@ -103,7 +102,14 @@ return array(
 ```
 
 Then, make sure you create a template for the page. In the above example, I'd 
-likely create the file in `module/Application/view/application/pages/about.phtml`.
+likely create the file in `module/Application/view/about.phtml`.
+
+After this you may go to page `http://your.host/proto?t=about` 
+or 
+`http://your.host/proto?t=about/first` - and will be sown template `module/Application/view/about/first.phtml`
+`http://your.host/proto?t=about/second` - and will be sown template `module/Application/view/about/second.phtml`
+`http://your.host/proto?t=about/second&l=layout/empty` - and will be sown template `module/Application/view/about/second.phtml`
+and layout `module/Application/view/layout/empty.phtml`
 
 ## Caching
 

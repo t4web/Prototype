@@ -176,6 +176,10 @@ class PageController implements
 
         $template = $matches->getParam('template', false);
         if (!$template) {
+            $template = $e->getRequest()->getQuery('t');
+        }
+
+        if (!$template) {
             $e->setError(Application::ERROR_CONTROLLER_INVALID);
             $response = $e->getResponse();
             if ($response instanceof HttpResponse) {
@@ -190,6 +194,10 @@ class PageController implements
         $e->setResult($model);
 
         $layout = $matches->getParam('layout', false);
+        if (!$layout) {
+            $layout = $e->getRequest()->getQuery('l');
+        }
+
         if ($layout) {
             $e->getViewModel()->setTemplate($layout);
         }
