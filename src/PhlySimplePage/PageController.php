@@ -174,9 +174,10 @@ class PageController implements
             ));
         }
 
-        $template = $matches->getParam('template', false);
+        $template = $e->getRequest()->getQuery('t');
+
         if (!$template) {
-            $template = $e->getRequest()->getQuery('t');
+            $template = $matches->getParam('template', false);
         }
 
         if (!$template) {
